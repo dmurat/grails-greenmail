@@ -42,7 +42,7 @@ grails.project.dependency.resolution = {
   }
 
   dependencies {
-    compile 'com.icegreen:greenmail:1.3'
+    compile 'com.icegreen:greenmail:1.4.0'
     runtime 'javax.mail:mail:1.4.1'
   }
 
