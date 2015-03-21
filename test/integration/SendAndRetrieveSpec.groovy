@@ -14,12 +14,13 @@
  * limitations under the License.
  */
 
+import grails.plugin.greenmail.GreenMail
+import grails.plugin.mail.MailService
 import spock.lang.Specification
 
 class SendAndRetrieveSpec extends Specification {
-
-  def mailService
-  def greenMail
+  MailService mailService
+  GreenMail greenMail
 
   def "send mail and retrieve via greenmail"() {
     when:
@@ -32,5 +33,33 @@ class SendAndRetrieveSpec extends Specification {
 
     then:
     greenMail.latestMessage.to == "tester@test.com"
+
+    greenMail.messagesCount == 1
+    greenMail.messages.size() == 1
+    greenMail.getMessage(0).to == "tester@test.com"
+    greenMail.getMessage(1) == null
+    greenMail.messages[0].to == "tester@test.com"
+    greenMail.latestMessage.to == "tester@test.com"
+    greenMail.messages.last().to == "tester@test.com"
+
+    cleanup:
+    greenMail.deleteAllMessages()
+  }
+
+  def 'cleanup mailbox'() {
+    given:
+    mailService.sendMail {
+      to "tester@test.com"
+      from "grails@grails.org"
+      subject "test"
+      text "This is a test"
+    }
+    assert greenMail.messages.last().to == "tester@test.com"
+
+    when:
+    greenMail.deleteAllMessages()
+
+    then:
+    greenMail.messages.isEmpty()
   }
 }
