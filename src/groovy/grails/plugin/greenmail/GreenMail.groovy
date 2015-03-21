@@ -28,54 +28,54 @@ import javax.mail.internet.MimeMessage
  */
 class GreenMail extends com.icegreen.greenmail.util.GreenMail {
 
-	GreenMail() {
-		super()
-	}
+  GreenMail() {
+    super()
+  }
 
-	GreenMail(ServerSetup config) {
-		super(config)
-	}
+  GreenMail(ServerSetup config) {
+    super(config)
+  }
 
-	GreenMail(ServerSetup[] config) {
-		super(config)
-	}
-	
-	void start() {
-		ImapHostManagerImpl.getDeclaredField('store').accessible = true
-		super.start()
-	}
-	
-	synchronized void stop() {
-		services.each { Service service -> service.stopService(stopTimeout) }
-	}
-	
-	void deleteAllMessages() {
-		managers.imapHostManager.store.listMailboxes('*')*.deleteAllMessages()
-	}
-	
-	int getMessagesCount() {
-		getMessages().size()
-	}
-	
-	Collection<MimeMessage> getMessages() {
-		getReceivedMessages().toList()
-	}
-	
-	MimeMessage getMessage(int index) {
-		def messages = getMessages()
-		if (index < messages.size()) {
-			messages[index]
-		} else {
-			null
-		}
-	}
-	
-	MimeMessage getLatestMessage() {
-		def messages = getMessages()
-		if (messages) {
-			messages.last()
-		} else {
-			null
-		}
-	}
+  GreenMail(ServerSetup[] config) {
+    super(config)
+  }
+
+  void start() {
+    ImapHostManagerImpl.getDeclaredField('store').accessible = true
+    super.start()
+  }
+
+  synchronized void stop() {
+    services.each { Service service -> service.stopService(stopTimeout) }
+  }
+
+  void deleteAllMessages() {
+    managers.imapHostManager.store.listMailboxes('*')*.deleteAllMessages()
+  }
+
+  int getMessagesCount() {
+    getMessages().size()
+  }
+
+  Collection<MimeMessage> getMessages() {
+    getReceivedMessages().toList()
+  }
+
+  MimeMessage getMessage(int index) {
+    def messages = getMessages()
+    if (index < messages.size()) {
+      messages[index]
+    } else {
+      null
+    }
+  }
+
+  MimeMessage getLatestMessage() {
+    def messages = getMessages()
+    if (messages) {
+      messages.last()
+    } else {
+      null
+    }
+  }
 }

@@ -14,31 +14,31 @@
  * limitations under the License.
  */
 grails.project.dependency.resolution = {
-	inherits "global"
-	log "warn"
+  inherits "global"
+  log "warn"
 
-	repositories {
-		grailsHome()
-		grailsCentral()
-		mavenCentral()
-	}
+  repositories {
+    grailsHome()
+    grailsCentral()
+    mavenCentral()
+  }
 
-	dependencies {
-		compile 'com.icegreen:greenmail:1.3'
-		runtime 'javax.mail:mail:1.4.1'
-	}
-	
-	plugins {
-		compile(":tomcat:$grailsVersion", ":hibernate:$grailsVersion") {
-			export = false
-		}
-		test (":spock:0.7", ":mail:1.0") {
-			export = false
-		}
-		build(":release:2.0.4") {
-			export = false
-		}
-	}
+  dependencies {
+    compile 'com.icegreen:greenmail:1.3'
+    runtime 'javax.mail:mail:1.4.1'
+  }
+
+  plugins {
+    compile(":tomcat:$grailsVersion", ":hibernate:$grailsVersion") {
+      export = false
+    }
+    test (":spock:0.7", ":mail:1.0") {
+      export = false
+    }
+    build(":release:2.0.4") {
+      export = false
+    }
+  }
 }
 
 grails.release.scm.enabled = false

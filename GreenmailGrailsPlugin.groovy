@@ -22,42 +22,42 @@ import javax.mail.Message.RecipientType
 
 class GreenmailGrailsPlugin {
 
-	def title = "Greenmail Plugin for Grails"
-	def description = "Provides a wrapper around GreenMail (http://www.icegreen.com/greenmail/) and provides a view that displays 'sent' messages"
-	def documentation = "http://grails.org/plugin/greenmail"
-	
-	def version = "1.3.4"
-	def grailsVersion = "1.3.0 > *"
-	def dependsOn = [:]
+  def title = "Greenmail Plugin for Grails"
+  def description = "Provides a wrapper around GreenMail (http://www.icegreen.com/greenmail/) and provides a view that displays 'sent' messages"
+  def documentation = "http://grails.org/plugin/greenmail"
 
-	def author = "Grails Plugin Collective"
-	def authorEmail = "grails-plugin-collective@gmail.com"
+  def version = "1.3.4"
+  def grailsVersion = "1.3.0 > *"
+  def dependsOn = [:]
 
-	def pluginExcludes = [
-		"grails-app/views/error.gsp"
-	]
-	
-	def doWithSpring = {
-		if (!application.config.greenmail.disabled){
-			def smtpPort = application.config.greenmail.ports.smtp ?: ServerSetupTest.SMTP.port
-			def smtp = new ServerSetup(smtpPort, null, "smtp")
+  def author = "Grails Plugin Collective"
+  def authorEmail = "grails-plugin-collective@gmail.com"
 
-			greenMail(GreenMail, [smtp] as ServerSetup[]) {
-				it.initMethod = 'start'
-				it.destroyMethod = 'stop'
-			}
-		}
-	}
-	
-	def doWithDynamicMethods = {
-		MimeMessage.metaClass {
-			getTo { -> delegate.tos[0] }
-			getTos { -> delegate.getRecipients(RecipientType.TO)*.toString() }
-			getCc { -> delegate.ccs[0] }
-			getCcs { -> delegate.getRecipients(RecipientType.CC)*.toString() }
-			getBcc { -> delegate.bccs[0] }
-			getBccs { -> delegate.getRecipients(RecipientType.BCC)*.toString() }
-		}
-	}
+  def pluginExcludes = [
+    "grails-app/views/error.gsp"
+  ]
+
+  def doWithSpring = {
+    if (!application.config.greenmail.disabled){
+      def smtpPort = application.config.greenmail.ports.smtp ?: ServerSetupTest.SMTP.port
+      def smtp = new ServerSetup(smtpPort, null, "smtp")
+
+      greenMail(GreenMail, [smtp] as ServerSetup[]) {
+        it.initMethod = 'start'
+        it.destroyMethod = 'stop'
+      }
+    }
+  }
+
+  def doWithDynamicMethods = {
+    MimeMessage.metaClass {
+      getTo { -> delegate.tos[0] }
+      getTos { -> delegate.getRecipients(RecipientType.TO)*.toString() }
+      getCc { -> delegate.ccs[0] }
+      getCcs { -> delegate.getRecipients(RecipientType.CC)*.toString() }
+      getBcc { -> delegate.bccs[0] }
+      getBccs { -> delegate.getRecipients(RecipientType.BCC)*.toString() }
+    }
+  }
 
 }

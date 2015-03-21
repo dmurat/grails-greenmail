@@ -19,19 +19,19 @@ import grails.plugin.spock.*
 
 class SendAndRetrieveSpec extends IntegrationSpec {
 
-	def mailService
-	def greenMail
-	
-	def "send mail and retrieve via greenmail"() {
-		when:
-		mailService.sendMail {
-			to "tester@test.com"
-			from "grails@grails.org"
-			subject "test"
-			text "This is a test"
-		}
-		
-		then:
-		greenMail.latestMessage.to == "tester@test.com"
-	}
+  def mailService
+  def greenMail
+
+  def "send mail and retrieve via greenmail"() {
+    when:
+    mailService.sendMail {
+      to "tester@test.com"
+      from "grails@grails.org"
+      subject "test"
+      text "This is a test"
+    }
+
+    then:
+    greenMail.latestMessage.to == "tester@test.com"
+  }
 }
