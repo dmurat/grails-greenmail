@@ -45,7 +45,7 @@
       <g:each in="${list}" status="i" var="email">
         <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
           <td>${i}</td>
-          <td>${email.sentDate}</td>
+          <td>${email.sentDate.format('yyyy-MM-dd HH:mm:ss')}</td>
           <td>${email.subject.encodeAsHTML() }</td>
           <td>${GreenMailUtil.getAddressList(email.getRecipients(javax.mail.Message.RecipientType.TO))}</td>
           <td class="actionButtons">
