@@ -37,6 +37,7 @@
           <th>id</th>
           <th>Sent</th>
           <th>Subject</th>
+          <th>Sender</th>
           <th>Recipients</th>
           <th>&nbsp;</th>
         </tr>
@@ -47,6 +48,7 @@
           <td>${i}</td>
           <td>${email.sentDate.format('yyyy-MM-dd HH:mm:ss')}</td>
           <td>${email.subject.encodeAsHTML() }</td>
+          <td>${GreenMailUtil.getAddressList(email.getFrom())}</td>
           <td>${GreenMailUtil.getAddressList(email.getRecipients(javax.mail.Message.RecipientType.TO))}</td>
           <td class="actionButtons">
             <span class="actionButton">
