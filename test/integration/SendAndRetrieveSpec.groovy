@@ -14,10 +14,9 @@
  * limitations under the License.
  */
 
-import spock.lang.*
-import grails.plugin.spock.*
+import spock.lang.Specification
 
-class SendAndRetrieveSpec extends IntegrationSpec {
+class SendAndRetrieveSpec extends Specification {
 
   def mailService
   def greenMail
