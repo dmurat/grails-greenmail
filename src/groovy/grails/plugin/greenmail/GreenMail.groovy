@@ -46,8 +46,6 @@ class GreenMail extends com.icegreen.greenmail.util.GreenMail {
 
   synchronized void stop() {
     super.stop()
-    Long stopTimeout = 5000L
-    services.values().each { Service service -> service.stopService(stopTimeout) }
   }
 
   void deleteAllMessages() {
