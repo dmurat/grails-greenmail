@@ -26,7 +26,7 @@ class GreenmailGrailsPlugin {
   def description = "Provides a wrapper around GreenMail (http://www.icegreen.com/greenmail/) and provides a view that displays 'sent' messages"
   def documentation = "http://grails.org/plugin/greenmail"
 
-  def version = "1.3.4"
+  def version = "1.3.4.1.BUILD-SNAPSHOT"
   def grailsVersion = "1.3.0 > *"
   def dependsOn = [:]
 
