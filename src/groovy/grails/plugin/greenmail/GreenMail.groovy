@@ -17,7 +17,6 @@ package grails.plugin.greenmail
 
 import com.icegreen.greenmail.imap.ImapHostManagerImpl
 import com.icegreen.greenmail.util.ServerSetup
-import com.icegreen.greenmail.util.ServerSetupTest
 import com.icegreen.greenmail.util.Service
 
 import javax.mail.internet.MimeMessage
@@ -46,7 +45,9 @@ class GreenMail extends com.icegreen.greenmail.util.GreenMail {
   }
 
   synchronized void stop() {
-    services.each { Service service -> service.stopService(stopTimeout) }
+    super.stop()
+    Long stopTimeout = 5000L
+    services.values().each { Service service -> service.stopService(stopTimeout) }
   }
 
   void deleteAllMessages() {
